@@ -12,7 +12,8 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": false,
     "baseUrl": ".",
-    "removeComments": true
+    "removeComments": true,
+    "resolveJsonModule": true
   },
   "include": [
     "src/**/*.ts",

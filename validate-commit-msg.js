@@ -1,5 +1,6 @@
-import path from 'path'
-import fs from 'fs'
+/* eslint-disable @typescript-eslint/no-var-requires */
+const path = require('path')
+const fs = require('fs')
 
 const msgPath = path.resolve(process.cwd(), '.git/COMMIT_EDITMSG')
 const msg = fs.readFileSync(msgPath, 'utf-8').trim()

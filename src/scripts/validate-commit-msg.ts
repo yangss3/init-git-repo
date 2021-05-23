@@ -11,6 +11,6 @@ const msgRegEx =
 
 if (!releaseRegEx.test(msg) && !msgRegEx.test(msg)) {
   console.log()
-  console.error(`${chalk.bgRedBright(' Error: ')}${chalk.redBright('invalid commit message format.')}\n  See ${chalk.cyanBright('https://www.conventionalcommits.org')} for more details.\n`)
+  console.error(`${chalk.red.bold(' Error: ')}${chalk.redBright('invalid commit message format.')}\n  See ${chalk.cyanBright('https://www.conventionalcommits.org')} for more details.\n`)
   process.exit(1)
 }

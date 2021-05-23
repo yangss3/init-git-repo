@@ -4,16 +4,16 @@ import fs from 'fs'
 import { exec as execCb } from 'child_process'
 import { promisify } from 'util'
 import ora from 'ora'
+import pkgJson from '../package.json'
 
 const spinner = ora()
 const exec = promisify(execCb)
 const cwd = process.cwd()
 const gitPath = path.resolve(cwd, '.git')
-
 const scripts = [
   `cd ${cwd}`,
   'npx mrm@2 lint-staged',
-  'npx husky add .husky/commit-msg "node ./node_modules/@yangss/init-git-repo/dist/scripts/validate-commit-msg.js"'
+  `npx husky add .husky/commit-msg "node ./node_modules/${pkgJson.name}/dist/scripts/validate-commit-msg.js"`
 ]
 
 async function init () {
