@@ -8,8 +8,6 @@ import ora from 'ora'
 const spinner = ora()
 const exec = promisify(execCb)
 const cwd = process.cwd()
-console.log(cwd)
-console.log(__dirname)
 const gitPath = path.resolve(cwd, '.git')
 
 const scripts = [
@@ -17,6 +15,7 @@ const scripts = [
   'npx mrm@2 lint-staged',
   'npx husky add .husky/commit-msg "node ./node_modules/@yangss/init-git-repo/scripts/validate-commit-msg.js"'
 ]
+
 async function init () {
   try {
     fs.accessSync(gitPath, fs.constants.F_OK)
@@ -24,8 +23,10 @@ async function init () {
     scripts.splice(1, 0, 'git init')
   }
   spinner.start('Initialize git Repo...')
-  await exec(scripts.join('&&'))
+  const output = await exec(scripts.join('&&'))
   spinner.succeed('Initialize git Repo completed')
+  console.log(output.stdout)
+  fs.rmSync(path.resolve(cwd, '6'))
 }
 
 init().catch(e => {

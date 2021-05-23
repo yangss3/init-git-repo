@@ -17,7 +17,7 @@
   "include": [
     "src/**/*.ts",
     "test/**/*.ts"
-, "src/scripts/validate-commit-msg.js"  ],
+  ],
   "exclude": [
     "node_modules",
     "dist"
