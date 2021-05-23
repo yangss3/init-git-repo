@@ -4,7 +4,7 @@ import fs from 'fs'
 const msgPath = path.resolve(process.cwd(), '.git/COMMIT_EDITMSG')
 const msg = fs.readFileSync(msgPath, 'utf-8').trim()
 
-const releaseRegEx = /^v\d/
+const releaseRegEx = /^v?(0|[1-9]\d*)(\.(0|[1-9]\d*))*$/
 const msgRegEx =
   /^(revert: )?(feat|fix|docs|refactor|perf|test|workflow|build|ci|chore|types|wip|release|deps)(\(.+\))?: .{1,50}/
 
