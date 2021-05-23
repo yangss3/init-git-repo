@@ -1,25 +1,24 @@
 {
   "name": "@yangss/init-git-repo",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "bin": {
-    "init-git-repo": "index.js"
+    "init-git-repo": "dist/index.js"
   },
   "scripts": {
     "build": "tsc",
     "lint": "eslint src/* --fix",
     "prepare": "husky install",
-    "patch": "npm run tsc && npm version patch && npm publish",
-    "minor": "npm run tsc && npm version minor && npm publish",
-    "major": "npm run tsc && npm version major && npm publish"
+    "patch": "npm run build && npm version patch && npm publish",
+    "minor": "npm run build && npm version minor && npm publish",
+    "major": "npm run build && npm version major && npm publish"
   },
   "lint-staged": {
     "*.(ts|js)": "eslint --fix"
   },
   "files": [
-    "dist/scripts",
-    "dist/index.js"
+    "dist"
   ],
   "publishConfig": {
     "access": "public"

@@ -13,7 +13,7 @@ const gitPath = path.resolve(cwd, '.git')
 const scripts = [
   `cd ${cwd}`,
   'npx mrm@2 lint-staged',
-  'npx husky add .husky/commit-msg "node ./node_modules/@yangss/init-git-repo/scripts/validate-commit-msg.js"'
+  'npx husky add .husky/commit-msg "node ./node_modules/@yangss/init-git-repo/dist/scripts/validate-commit-msg.js"'
 ]
 
 async function init () {
@@ -24,9 +24,9 @@ async function init () {
   }
   spinner.start('Initialize git Repo...')
   const output = await exec(scripts.join('&&'))
-  spinner.succeed('Initialize git Repo completed')
-  console.log(output.stdout)
   fs.rmSync(path.resolve(cwd, '6'))
+  console.log(output.stdout)
+  spinner.succeed('Initialize git Repo completed')
 }
 
 init().catch(e => {
