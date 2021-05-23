@@ -1,5 +1,6 @@
 import path from 'path'
 import fs from 'fs'
+import chalk from 'chalk'
 
 const msgPath = path.resolve(process.cwd(), '.git/COMMIT_EDITMSG')
 const msg = fs.readFileSync(msgPath, 'utf-8').trim()
@@ -10,7 +11,6 @@ const msgRegEx =
 
 if (!releaseRegEx.test(msg) && !msgRegEx.test(msg)) {
   console.log()
-  console.error(' Error: invalid commit message format.\n  See https://www.conventionalcommits.org for more details.\n'
-  )
+  console.error(`${chalk.bgRedBright(' Error: ')}${chalk.redBright('invalid commit message format.')}\n  See ${chalk.cyanBright('https://www.conventionalcommits.org')} for more details.\n`)
   process.exit(1)
 }

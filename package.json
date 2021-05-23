@@ -18,8 +18,7 @@
     "*.(ts|js)": "eslint --fix"
   },
   "files": [
-    "dist/scripts",
-    "dist/index.js"
+    "dist"
   ],
   "publishConfig": {
     "access": "public"
