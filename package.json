@@ -1,6 +1,6 @@
 {
   "name": "@yangss/init-git-repo",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Initialize git repo with some configurations, like lint staged file and conventional commits",
   "main": "dist/index.js",
   "bin": {
