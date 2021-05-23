@@ -1,0 +1,44 @@
+{
+  "name": "init-git-repo",
+  "version": "0.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "bin": {
+    "init-git-repo": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src/* --fix",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@types/node": "^15.6.0",
+    "@yangss/eslint-config-ts": "^0.1.4",
+    "eslint": "^7.26.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
+    "typescript": "^4.2.4"
+  },
+  "lint-staged": {
+    "*.(ts|js)": "eslint --fix"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "git",
+    "hooks",
+    "lint",
+    "commit-msg"
+  ],
+  "author": "Nicholas Yang <yss_2016@outlook.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yangss3/init-git-repo.git"
+  },
+  "homepage": "https://github.com/yangss3/init-git-repo#readme",
+  "license": "ISC"
+}
