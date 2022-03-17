@@ -11,7 +11,7 @@ const cwd = process.cwd()
 const gitPath = path.resolve(cwd, '.git')
 const scripts = [
   `cd ${cwd}`,
-  'npx mrm@2 lint-staged',
+  'npx mrm@3 lint-staged',
   'npx husky add .husky/commit-msg "node ./node_modules/@yangss/init-git-repo/dist/scripts/validate-commit-msg.js"'
 ]
 
