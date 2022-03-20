@@ -32,6 +32,7 @@ function run () {
   spinner.start('Initialize git Repo...')
   const output = execSync(scripts.join('&&'), { encoding: 'utf-8' })
   removeSync(path.resolve(cwd, '6'))
+  console.log()
   console.log(output)
   updatePkgJson()
   spinner.succeed('Completed!')
