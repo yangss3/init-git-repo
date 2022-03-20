@@ -30,7 +30,6 @@ function run () {
     scripts.splice(1, 0, 'git init')
   }
   spinner.start('Initialize git Repo...')
-  console.log(scripts.join('&&'))
   const output = execSync(scripts.join('&&'))
   removeSync(path.resolve(cwd, '6'))
   console.log(output)
@@ -40,7 +39,6 @@ function run () {
 
 function updatePkgJson() {
   const pkgJson = readJsonSync(pkgJsonPath)
-  console.log(pkgJson)
   const lintStaged: Record<string, string> = {}
   switch(type) {
     case 'ts':
@@ -53,7 +51,7 @@ function updatePkgJson() {
       lintStaged['*.(js|jsx)'] = 'eslint --fix'
   }
   pkgJson['lint-staged'] = lintStaged
-  outputJsonSync(pkgJsonPath, pkgJson)
+  outputJsonSync(pkgJsonPath, pkgJson, { spaces: 2 })
 }
 
 
