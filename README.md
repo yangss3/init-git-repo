@@ -3,10 +3,16 @@
 
 Install `init-git-repo` in you local repo:
 ```sh
-npm install -D @yangss/init-git-repo
+# npm
+npm install -D @yangss/init-git-repo eslint
+# pnpm
+pnpm add -D @yangss/init-git-repo eslint
 ```
 then, config your repo with:
 ```sh
-npx init-git-repo
+# npm
+npx init-git-repo --type [js|ts|vue]
+# pnpm
+pnpm exec init-git-repo --type [js|ts|vue]
 ```
-done.
+Done.
