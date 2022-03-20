@@ -1,33 +1,65 @@
 #!/usr/bin/env node
+
+import minimist from 'minimist'
 import path from 'path'
-import fs from 'fs'
-import { exec as execCb } from 'child_process'
-import { promisify } from 'util'
+import fs from 'fs-extra'
+import { execSync } from 'child_process'
 import ora from 'ora'
 
-const spinner = ora()
-const exec = promisify(execCb)
+const { pathExistsSync, removeSync, outputJsonSync, readJsonSync } = fs
+
+type RepoType = 'js' | 'ts' | 'vue'
+
+const args = minimist(process.argv.slice(2))
+const type: RepoType = args.t || args.type || 'js'
+
 const cwd = process.cwd()
 const gitPath = path.resolve(cwd, '.git')
+const pkgJsonPath = path.resolve(cwd, 'package.json')
+
+const spinner = ora()
+
 const scripts = [
   `cd ${cwd}`,
   'npx mrm@3 lint-staged',
   'npx husky add .husky/commit-msg "node ./node_modules/@yangss/init-git-repo/dist/scripts/validate-commit-msg.js"'
 ]
 
-async function init () {
-  try {
-    fs.accessSync(gitPath, fs.constants.F_OK)
-  } catch (error) {
+function run () {
+  if(!pathExistsSync(gitPath)) {
     scripts.splice(1, 0, 'git init')
   }
   spinner.start('Initialize git Repo...')
-  const output = await exec(scripts.join('&&'))
-  fs.rmSync(path.resolve(cwd, '6'))
-  console.log(output.stdout)
-  spinner.succeed('Initialize git Repo completed')
+  console.log(scripts.join('&&'))
+  const output = execSync(scripts.join('&&'))
+  removeSync(path.resolve(cwd, '6'))
+  console.log(output)
+  updatePkgJson()
+  spinner.succeed('Completed!')
 }
 
-init().catch(e => {
-  console.error(e)
-})
+function updatePkgJson() {
+  const pkgJson = readJsonSync(pkgJsonPath)
+  console.log(pkgJson)
+  const lintStaged: Record<string, string> = {}
+  switch(type) {
+    case 'ts':
+      lintStaged['*.(js|ts|tsx)'] = 'eslint --fix'
+      break
+    case 'vue':
+      lintStaged['*.(ts|tsx|vue)'] = 'eslint --fix'
+      break
+    default:
+      lintStaged['*.(js|jsx)'] = 'eslint --fix'
+  }
+  pkgJson['lint-staged'] = lintStaged
+  outputJsonSync(pkgJsonPath, pkgJson)
+}
+
+
+try {
+  run()
+} catch (error) {
+  console.error(error)
+  process.exit(1)
+}
