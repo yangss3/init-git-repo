@@ -30,7 +30,7 @@ function run () {
     scripts.splice(1, 0, 'git init')
   }
   spinner.start('Initialize git Repo...')
-  const output = execSync(scripts.join('&&'))
+  const output = execSync(scripts.join('&&'), { encoding: 'utf-8' })
   removeSync(path.resolve(cwd, '6'))
   console.log(output)
   updatePkgJson()

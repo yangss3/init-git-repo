@@ -1,9 +1,9 @@
 import path from 'path'
-import { readFileSync } from 'fs-extra'
+import fs from 'fs-extra'
 import chalk from 'chalk'
 
 const msgPath = path.resolve(process.cwd(), '.git/COMMIT_EDITMSG')
-const msg = readFileSync(msgPath, 'utf-8').trim()
+const msg = fs.readFileSync(msgPath, 'utf-8').trim()
 
 const releaseRegEx = /^v?(0|[1-9]\d*)(\.(0|[1-9]\d*))*$/
 const msgRegEx =
